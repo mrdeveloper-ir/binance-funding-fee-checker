@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile.app
+        container_name: binance-funding-fee-service
+        env_file:
+            - .env
+        ports:
+            - '3000:${APP_PORT}'
+        restart: always
