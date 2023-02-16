@@ -4,9 +4,52 @@ services:
         build:
             context: .
             dockerfile: Dockerfile.app
-        container_name: binance-funding-fee-service
+        container_name: 'app'
+        restart: always
         env_file:
             - .env
         ports:
             - '3000:${APP_PORT}'
+        networks:
+            - localnet
+
+    mysql:
+        image: mysql:8.0
+        container_name: 'mysql'
         restart: always
+        environment:
+            - MYSQL_DATABASE=binance_bot
+            - MYSQL_ROOT_PASSWORD=myveryverysecretstrongultrapa$$w0rd
+            - MYSQL_USER=app
+            - MYSQL_PASSWORD=myveryverysecretstrongultrapasswoOord
+        ports:
+            - '3306:3306'
+        volumes:
+            - db_volume:/var/lib/mysql
+        networks:
+            - localnet
+
+    redis:
+        image: redis:alpine3.17
+        container_name: redis
+        ports:
+            - '6379:6379'
+        restart: always
+        networks:
+            - localnet
+
+    cronjob:
+        container_name: cronjob
+        build:
+            context: .
+            dockerfile: Dockerfile.cronjobs
+        restart: always
+        networks:
+            - localnet
+
+volumes:
+    db_volume:
+
+
+networks:
+    localnet:
