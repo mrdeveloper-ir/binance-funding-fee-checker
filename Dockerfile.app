@@ -1,9 +1,9 @@
 FROM node:18.14.0-alpine3.16
 RUN apk update
-RUN apk add dumb-init python3 make gcc node-gyp
+RUN apk add dumb-init python3 make gcc
 WORKDIR /app
 COPY package*.json .
-RUN npm install -g node-pre-gyp
+RUN npm install -g node-pre-gyp node-gyp
 RUN npm install
 COPY . .
 RUN npx prisma migrate deploy
