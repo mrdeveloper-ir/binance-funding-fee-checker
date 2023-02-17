@@ -1,5 +1,6 @@
 FROM node:18.14.0-alpine3.17
 RUN apk update
+RUN apk add python3
 RUN apk add --no-cache --upgrade grep
 WORKDIR /app
 COPY package*.json .
