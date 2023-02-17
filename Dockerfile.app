@@ -1,6 +1,6 @@
 FROM node:18.14.0-alpine3.16
 RUN apk update
-RUN apk add dumb-init python3 make gcc
+RUN apk add dumb-init python3 make gcc node-gyp
 WORKDIR /app
 COPY package*.json .
 RUN npm install -g node-pre-gyp
