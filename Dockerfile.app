@@ -1,4 +1,4 @@
-FROM node:18.14.0-alpine3.17
+FROM node:18.14.0-alpine3.16
 RUN apk update
 RUN apk add dumb-init python3 make gcc
 WORKDIR /app
