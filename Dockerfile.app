@@ -3,6 +3,7 @@ RUN apk update
 RUN apk add dumb-init
 WORKDIR /app
 COPY package*.json .
+RUN npm install -g node-pre-gyp
 RUN npm install
 COPY . .
 RUN npx prisma migrate deploy
